@@ -13,7 +13,7 @@
 .nav-word{font-family:"Anton",var(--font-display);font-weight:400;letter-spacing:.04em;font-size:1.15rem;text-transform:uppercase;}
 .nav-word-white{color:var(--cream);}.nav-word-gold{color:var(--gold-1);}
 .nav-links{display:flex;gap:28px;align-items:center;}
-.nav-links > a{color:rgba(248,242,231,.75);font-size:.88rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .25s ease;}
+.nav-links a{color:rgba(248,242,231,.75);font-size:.88rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color .25s ease;}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--aqua);transition:width .3s ease;}
 .nav-links a:hover{color:var(--cream);}.nav-links a:hover::after{width:100%;}
 .nav-cta{background:linear-gradient(120deg,var(--gold-3),var(--gold-1) 45%,var(--gold-2) 70%,var(--gold-4));color:var(--black);font-weight:700;font-size:.85rem;padding:10px 20px;border-radius:100px;letter-spacing:.02em;transition:transform .25s ease,background .25s ease;}
@@ -167,7 +167,7 @@
 .side-rail-dot{position:absolute;left:-4px;top:8%;width:9px;height:9px;border-radius:50%;background:var(--gold-2);box-shadow:0 0 12px rgba(216,167,61,.7);transition:top .15s linear;}
 @media (max-width:900px){.side-rail{display:none;}}
 .hero-photo-section{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;color:var(--cream);}.hero-photo-bg{position:absolute;inset:0;z-index:0;}
-.hero-photo-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 20%;transform:scale(1.08);animation:heroKenburns 20s ease-in-out infinite alternate;}
+.hero-photo-bg img{width:100%;height:100%;object-fit:cover;osject-position:60% 20%;transform:scale(1.08);animation:heroKenburns 20s ease-in-out infinite alternate;}
 @keyframes heroKenburns{0%{transform:scale(1.08) translate(0,0);}100%{transform:scale(1.18) translate(-2%,1%);}}
 .hero-photo-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(20,18,15,.92) 20%,rgba(20,18,15,.62) 46%,rgba(20,18,15,.15) 68%,rgba(20,18,15,.35) 100%),linear-gradient(0deg,rgba(20,18,15,.55),transparent 40%);}
 .hero-particles{position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;}.hero-particles .mote{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle,rgba(247,231,180,.95),rgba(216,167,61,.15));box-shadow:0 0 10px rgba(247,231,180,.6);animation-name:moteRise;animation-timing-function:ease-in;animation-iteration-count:infinite;}
