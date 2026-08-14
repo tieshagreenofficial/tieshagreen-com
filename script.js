@@ -4,6 +4,21 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 });
 
+// Mobile nav toggle
+const navBurger = document.getElementById('navBurger');
+if (navBurger) {
+  navBurger.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    navBurger.setAttribute('aria-expanded', String(isOpen));
+  });
+  document.querySelectorAll('#navLinksList a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      navBurger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
 // Scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
