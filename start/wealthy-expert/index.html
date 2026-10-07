@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wealthy Expert™: the founding cohort | Tiesha Green</title>
+<meta name="description" content="Get first access to the Wealthy Expert™ founding cohort, at founding-cohort pricing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../start.css">
+</head>
+<body>
+
+<div class="lp-wrap">
+
+  <a class="lp-back" href="../">&larr; Back</a>
+
+  <p class="lp-card-eyebrow">Wealthy Expert&trade;: the founding cohort</p>
+  <h1 class="lp-card-title">Liberated &amp; Paid</h1>
+
+  <p class="lp-card-body">Build the positioning, messaging, visibility and offers that turn your expertise into a business people understand, trust and buy from. The founding cohort opens at a lower price, for this round only. Get on the list and you'll hear first.</p>
+
+  <form class="lp-form" id="weForm" novalidate>
+    <input class="lp-field" type="text" name="firstName" id="weFirstName" placeholder="First name" autocomplete="given-name" required>
+    <input class="lp-field" type="email" name="email" id="weEmail" placeholder="Email address" autocomplete="email" required>
+    <p class="lp-error" id="weError">Something went wrong. Please try again.</p>
+    <button class="lp-btn lp-btn-primary" type="submit" id="weSubmit"><span class="lp-btn-text">Get first access</span></button>
+    <p class="lp-form-note">No spam. Unsubscribe anytime. See our <a href="../../privacy.html" style="text-decoration:underline;">privacy policy</a>.</p>
+  </form>
+
+  <div class="lp-success" id="weSuccess">
+    <p class="lp-card-title" style="font-size:1.4rem;">You're on the list.</p>
+    <p class="lp-card-body" style="margin-bottom:0;">You'll be the first to know when doors open.</p>
+  </div>
+
+  <div class="lp-footer">
+    <p class="lp-copy">&copy; <span id="year"></span> Tiesha Green</p>
+  </div>
+
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const WEALTHY_EXPERT_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/5zEv2FFMjyeAsbyYv5KE/webhook-trigger/5d88e478-89bf-4ee8-92e4-57750614a3f1";
+
+const form = document.getElementById('weForm');
+const errorEl = document.getElementById('weError');
+const submitBtn = document.getElementById('weSubmit');
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  errorEl.classList.remove('is-visible');
+
+  const firstName = document.getElementById('weFirstName').value.trim();
+  const email = document.getElementById('weEmail').value.trim();
+  if (!firstName || !email) return;
+
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch(WEALTHY_EXPERT_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: firstName,
+        email: email,
+        source: 'tieshagreen.com/start',
+        tag: 'Wealthy-Expert-Interest'
+      })
+    });
+    if (!res.ok) throw new Error('bad response');
+
+    form.classList.add('is-hidden');
+    document.getElementById('weSuccess').classList.add('is-visible');
+  } catch (err) {
+    submitBtn.disabled = false;
+    errorEl.classList.add('is-visible');
+  }
+});
+</script>
+</body>
+</html>

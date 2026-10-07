@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Authority Shift | Tiesha Green</title>
+<meta name="description" content="A weekly note on owning your expertise and becoming the one people choose. Straight talk, no fluff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../start.css">
+</head>
+<body>
+
+<div class="lp-wrap">
+
+  <a class="lp-back" href="../">&larr; Back</a>
+
+  <h1 class="lp-card-title">The Authority Shift</h1>
+
+  <p class="lp-card-body">A weekly note on owning your expertise and becoming the one people choose. Straight talk, no fluff.</p>
+
+  <form class="lp-form" id="nlForm" novalidate>
+    <input class="lp-field" type="text" name="firstName" id="nlFirstName" placeholder="First name" autocomplete="given-name" required>
+    <input class="lp-field" type="email" name="email" id="nlEmail" placeholder="Email address" autocomplete="email" required>
+    <p class="lp-error" id="nlError">Something went wrong. Please try again.</p>
+    <button class="lp-btn lp-btn-primary" type="submit" id="nlSubmit"><span class="lp-btn-text">Send it to me</span></button>
+    <p class="lp-form-note">No spam. Unsubscribe anytime. See our <a href="../../privacy.html" style="text-decoration:underline;">privacy policy</a>.</p>
+  </form>
+
+  <div class="lp-success" id="nlSuccess">
+    <p class="lp-card-title" style="font-size:1.4rem;">You're in.</p>
+    <p class="lp-card-body" style="margin-bottom:0;">Check your inbox.</p>
+  </div>
+
+  <div class="lp-footer">
+    <p class="lp-copy">&copy; <span id="year"></span> Tiesha Green</p>
+  </div>
+
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const NEWSLETTER_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/5zEv2FFMjyeAsbyYv5KE/webhook-trigger/36b82ed2-def1-4bf2-82ed-2d6f0526ce3b";
+
+const form = document.getElementById('nlForm');
+const errorEl = document.getElementById('nlError');
+const submitBtn = document.getElementById('nlSubmit');
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  errorEl.classList.remove('is-visible');
+
+  const firstName = document.getElementById('nlFirstName').value.trim();
+  const email = document.getElementById('nlEmail').value.trim();
+  if (!firstName || !email) return;
+
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch(NEWSLETTER_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: firstName,
+        email: email,
+        source: 'tieshagreen.com/start',
+        tag: 'authority-shift'
+      })
+    });
+    if (!res.ok) throw new Error('bad response');
+
+    form.classList.add('is-hidden');
+    document.getElementById('nlSuccess').classList.add('is-visible');
+  } catch (err) {
+    submitBtn.disabled = false;
+    errorEl.classList.add('is-visible');
+  }
+});
+</script>
+</body>
+</html>
